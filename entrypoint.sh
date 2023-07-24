@@ -44,4 +44,12 @@ if [ "$JEKYLL_ROOTLESS" ]; then
   groupmod -o -g $JEKYLL_GID jekyll
 fi
 
-exec "$@"
+# If pwd has a Gemfile, install it and run via bundler
+if [ -f "Gemfile" ]; then
+  bundle install
+  su-exec jekyll bundle exec "$@"
+# If no Gemfile, run as-is with jekyll user
+else
+  su-exec jekyll "$@"
+fi
+
