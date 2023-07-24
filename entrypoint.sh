@@ -1,6 +1,4 @@
-#!/bin/bash
-[ "$DEBUG" = "true" ] && set -x
-set -e
+#!/bin/sh
 
 #
 # Running rootless means that we force Jekyll to run
