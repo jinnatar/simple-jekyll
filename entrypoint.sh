@@ -44,10 +44,13 @@ fi
 
 # If pwd has a Gemfile, install it and run via bundler
 if [ -f "Gemfile" ]; then
+  >&2 echo "Installing bundle.."
   bundle install
+  >&2 echo "Launching via bundle.."
   su-exec jekyll bundle exec "$@"
 # If no Gemfile, run as-is with jekyll user
 else
+  >&2 echo "No Gemfile, launching plain.."
   su-exec jekyll "$@"
 fi
 
