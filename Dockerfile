@@ -1,6 +1,6 @@
-FROM ruby:alpine3.18
+FROM ruby:3.3.0-alpine3.19
 
-ARG JEKYLL_VERSION=4.3.2
+ARG JEKYLL_VERSION=4.3.3
 
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
@@ -24,8 +24,7 @@ RUN apk --no-cache add \
 RUN echo "gem: --no-ri --no-rdoc" > ~/.gemrc && gem update --system
 
 # Install basics to lessen need of providing a Gemfile
-RUN gem install bundler jekyll:$JEKYLL_VERSION sass-embedded jekyll-feed jekyll-seo-tag minima -- \
-    --use-system-libraries --no-cache
+RUN gem install bundler jekyll:$JEKYLL_VERSION sass-embedded jekyll-feed jekyll-seo-tag minima
 
 COPY entrypoint.sh /bin/entrypoint
 
